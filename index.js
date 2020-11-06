@@ -76,6 +76,15 @@ app.get('./profiles', (req, res) => {
   })
 })
 
+// POST/books
+
+app.get('./books', (req, res) => {
+  res.json({
+    status: 'book success',
+    data: 'db.books'
+  })
+})
+
 // POST/Profiles
 
 app.post('/profiles', (req, res) => {
@@ -141,7 +150,7 @@ app.put ('/profiles/:userId', (req, res) => {
 
 app.patch ('/profiles/:userId', (req, res) => {
   
-  db.ptofiles[req.params.userId] = {
+  db.profiles[req.params.userId] = {
     ...db.profiles[reqparams.userId],
     ...req.body
   }
