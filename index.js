@@ -6,7 +6,7 @@ const cors = require ('cors');
 const edensProfile = {
   firstName: "Eden",
   middleName: "Lindy",
-  lastName: "Smith-Wint",
+  // lastName: "Smith-Wint",
   preferences: {
     foods: ["grapes", "popcorn"],
     colour: "purple",
@@ -29,20 +29,20 @@ const db ={
     1000: edensProfile,
   },
   books: {
-    0: {harryPotter,
-     },
+    300: harryPotter,
+  },
 
-     1: {
-       title: 'Harry Potter and the Chamber of Secrets',
-       author: 'J. K. Rowling'
-     },
+    //  1: {
+    //    title: 'Harry Potter and the Chamber of Secrets',
+    //    author: 'J. K. Rowling'
+    //  },
 
-     2: {
-       title: 'Harry Potter and the Prisoner of Azkaban',
-       author: 'J. K. Rowling'
-     }
+    //  2: {
+    //    title: 'Harry Potter and the Prisoner of Azkaban',
+    //    author: 'J. K. Rowling'
+    //  }
   }
-}
+
 
 const app = express()
 app.use(cors())
@@ -51,13 +51,13 @@ app.use(express.json())
 
 // GET/ Profiles
 
-// app.get('/profiles', '/books',  (req, res) => {
-//   res.json({
-//     status: 'success',
-//     data: db.profiles,
-//     data: db.books
-//   })
-// })
+app.get('/profiles',  (req, res) => {
+  res.json({
+    status: 'success',
+    data: db.profiles,
+    
+  })
+})
 
 // // Get/ Books
 app.get('/books', (req, res) => {
@@ -81,7 +81,7 @@ app.get('./profiles', (req, res) => {
 
 app.get('./books', (req, res) => {
   res.json({
-    status: 'book success',
+    status: 'good', 
     data: 'db.books'
   })
 })
@@ -104,6 +104,26 @@ app.post('/profiles', (req, res) => {
   })
 })
 
+// POST/Books
+
+app.post('/books', (req, res) => {
+
+  const newExistingIds = Object.keys(db.books)
+  const newLargestKey = Math.max(...newExistingIds)
+
+  const theNewKey = newLargestKey +1
+
+  db.books[theNewKey] =req.body
+
+  res.json({
+    status:'success',
+    message:`Created new book with id of ${theNewKey}`
+  })
+})
+
+
+
+
 // Get profile after adding new-save time typing- don't have to specify route parameter
 app.get('/profiles/:userId', (res, req) => {
   console.log(req,params.userId)
@@ -122,6 +142,28 @@ app.get('/profiles/:userId', (res, req) => {
   }
   
 })
+
+// Get books after adding new-save time typing- don't have to specify route parameter
+
+app.get('/books/:userId', (res, req) => {
+  console.log(req,params.userId)
+
+  const matchingBooks = db.books[req.params.userId]
+
+  if (matchingProfile) {
+    res.json({
+      status: 'success',
+      data: matchingBooks
+    })
+  } else {
+    res.json({
+      message:"Couldn't find Book with that id"
+    })
+  }
+  
+})
+
+
 
 // Delete Profile
 app.delete('./profiles/:userId', (req, res) => {
@@ -166,6 +208,6 @@ app.patch ('/profiles/:userId', (req, res) => {
 
 
 
-app.listen(2004, () => {
+app.listen(4000, () => {
     console.log('it is working woop!')
 })
