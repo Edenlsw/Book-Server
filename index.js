@@ -51,14 +51,15 @@ app.use(express.json())
 
 // GET/ Profiles
 
-app.get('/profiles', (req, res) => {
-  res.json({
-    status: 'success',
-    data: db.profiles
-  })
-})
+// app.get('/profiles', '/books',  (req, res) => {
+//   res.json({
+//     status: 'success',
+//     data: db.profiles,
+//     data: db.books
+//   })
+// })
 
-// Get/ Books
+// // Get/ Books
 app.get('/books', (req, res) => {
   res.json({
     status: 'success',
@@ -165,6 +166,6 @@ app.patch ('/profiles/:userId', (req, res) => {
 
 
 
-app.listen(2000, () => {
+app.listen(2004, () => {
     console.log('it is working woop!')
 })
