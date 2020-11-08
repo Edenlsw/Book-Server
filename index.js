@@ -239,7 +239,7 @@ app.patch ('/books/:userId', (req, res) => {
   }
 
   res.json({
-    message: "User is now updated"
+    message: "Book is now updated"
   })
 })
 
