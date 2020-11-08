@@ -6,7 +6,7 @@ const cors = require ('cors');
 const edensProfile = {
   firstName: "Eden",
   middleName: "Lindy",
-  // lastName: "Smith-Wint",
+  lastName: "Smith-Wint",
   preferences: {
     foods: ["grapes", "popcorn"],
     colour: "purple",
@@ -196,6 +196,20 @@ app.put ('/profiles/:userId', (req, res) => {
 
   res.json({
     message: "User updated"
+  })
+
+})
+
+
+// Put / books- update entire code/overwrite
+
+app.put ('/books/:userId', (req, res) => {
+  const newIdToUpdate = req.params.userId
+
+  db.books[newIdToUpdate] = req.body
+
+  res.json({
+    message: "Book updated"
   })
 
 })
