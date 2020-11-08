@@ -166,7 +166,7 @@ app.get('/books/:userId', (req, res) => {
 
 
 // Delete Profile
-app.delete('./profiles/:userId', (req, res) => {
+app.delete('/profiles/:userId', (req, res) => {
   delete db.profiles[req.params.userId]
 
   res.json({
@@ -174,6 +174,17 @@ app.delete('./profiles/:userId', (req, res) => {
     message: ' deleted profile'
   })
 })
+
+// Delete Book
+app.delete('/books/:userId', (req, res) => {
+  delete db.books[req.params.userId]
+
+  res.json({
+    status: 'success',
+    message: ' deleted book'
+  })
+})
+
 
 
 // Put / profiles- update entire code/overwrite
