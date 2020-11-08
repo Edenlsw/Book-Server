@@ -125,8 +125,8 @@ app.post('/books', (req, res) => {
 
 
 // Get profile after adding new-save time typing- don't have to specify route parameter
-app.get('/profiles/:userId', (res, req) => {
-  console.log(req,params.userId)
+app.get('/profiles/:userId', (req, res) => {
+  console.log(req.params.userId)
 
   const matchingProfile = db.profiles[req.params.userId]
 
@@ -145,12 +145,12 @@ app.get('/profiles/:userId', (res, req) => {
 
 // Get books after adding new-save time typing- don't have to specify route parameter
 
-app.get('/books/:userId', (res, req) => {
-  console.log(req,params.userId)
+app.get('/books/:userId', (req, res) => {
+  console.log(req.params.userId)
 
   const matchingBooks = db.books[req.params.userId]
 
-  if (matchingProfile) {
+  if (matchingBooks) {
     res.json({
       status: 'success',
       data: matchingBooks
