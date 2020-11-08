@@ -219,7 +219,22 @@ app.put ('/books/:userId', (req, res) => {
 app.patch ('/profiles/:userId', (req, res) => {
   
   db.profiles[req.params.userId] = {
-    ...db.profiles[reqparams.userId],
+    ...db.profiles[req.params.userId],
+    ...req.body
+  }
+
+  res.json({
+    message: "User is now updated"
+  })
+})
+
+
+// Patch /Books- updates pieces / adds to code
+
+app.patch ('/books/:userId', (req, res) => {
+  
+  db.books[req.params.userId] = {
+    ...db.books[req.params.userId],
     ...req.body
   }
 
