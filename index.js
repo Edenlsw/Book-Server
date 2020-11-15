@@ -52,7 +52,7 @@ app.use(express.json())
 // GET/ Profiles
 
 app.get('/profiles',  (req, res) => {
-  res.json({
+  res.status(200).json({
     status: 'success',
     data: db.profiles,
     
@@ -61,30 +61,30 @@ app.get('/profiles',  (req, res) => {
 
 // // Get/ Books
 app.get('/books', (req, res) => {
-  res.json({
+  res.status(200).json({
     status: 'success',
     data: db.books
   })
 })
 
 
-// POST/Profiles
+// // GET/Profiles
 
-app.get('./profiles', (req, res) => {
-  res.json({
-    status: 'success', 
-    data: 'db.profiles'
-  })
-})
+// app.get('./profiles', (req, res) => {
+//   res.status(200).json({
+//     status: 'success', 
+//     data: 'db.profiles'
+//   })
+// })
 
-// POST/books
+// // GET/books
 
-app.get('./books', (req, res) => {
-  res.json({
-    status: 'good', 
-    data: 'db.books'
-  })
-})
+// app.get('./books', (req, res) => {
+//   res.status(200).json({
+//     status: 'good', 
+//     data: 'db.books'
+//   })
+// })
 
 // POST/Profiles
 
@@ -98,7 +98,7 @@ app.post('/profiles', (req, res) => {
 
   db.profiles[newKey] =req.body
 
-  res.json({
+  res.status(201).json({
     status: 'success',
     message: `Created a profile with id of ${newKey}`
   })
@@ -115,7 +115,7 @@ app.post('/books', (req, res) => {
 
   db.books[theNewKey] =req.body
 
-  res.json({
+  res.status(201).json({
     status:'success',
     message:`Created new book with id of ${theNewKey}`
   })
@@ -136,7 +136,7 @@ app.get('/profiles/:userId', (req, res) => {
       data: matchingProfile
     })
   } else {
-    res.json({
+    res.status(404).json({
       message:"Couldn't find user with that id"
     })
   }
@@ -156,7 +156,7 @@ app.get('/books/:userId', (req, res) => {
       data: matchingBooks
     })
   } else {
-    res.json({
+    res.status(404).json({
       message:"Couldn't find Book with that id"
     })
   }
@@ -169,7 +169,7 @@ app.get('/books/:userId', (req, res) => {
 app.delete('/profiles/:userId', (req, res) => {
   delete db.profiles[req.params.userId]
 
-  res.json({
+  res.status(200).json({
     status: 'success',
     message: ' deleted profile'
   })
@@ -179,7 +179,7 @@ app.delete('/profiles/:userId', (req, res) => {
 app.delete('/books/:userId', (req, res) => {
   delete db.books[req.params.userId]
 
-  res.json({
+  res.status(200).json({
     status: 'success',
     message: ' deleted book'
   })
@@ -194,7 +194,7 @@ app.put ('/profiles/:userId', (req, res) => {
 
   db.profiles[idToUpdate] = req.body
 
-  res.json({
+  res.status(200).json({
     message: "User updated"
   })
 
@@ -208,7 +208,7 @@ app.put ('/books/:userId', (req, res) => {
 
   db.books[newIdToUpdate] = req.body
 
-  res.json({
+  res.status(200).json({
     message: "Book updated"
   })
 
@@ -223,7 +223,7 @@ app.patch ('/profiles/:userId', (req, res) => {
     ...req.body
   }
 
-  res.json({
+  res.status(200).json({
     message: "User is now updated"
   })
 })
@@ -238,7 +238,7 @@ app.patch ('/books/:userId', (req, res) => {
     ...req.body
   }
 
-  res.json({
+  res.status(200).json({
     message: "Book is now updated"
   })
 })
